@@ -1,27 +1,41 @@
+import os
+import sys
 import joblib
 import pandas as pd
+
+# =========================
+# SET BASE DIRECTORY
+# =========================
+
+BASE_DIR = os.path.dirname(
+    os.path.dirname(os.path.abspath(__file__))
+)
+
+sys.path.append(BASE_DIR)
+
+# =========================
+# IMPORT MODULES
+# =========================
+
+from tariff_engine import calculate_bill
+from smart_alert_engine import analyze_usage
 
 # =========================
 # LOAD TRAINED MODEL
 # =========================
 
-model = joblib.load("../electricity_bill_model.pkl")
+model_path = os.path.join(
+    BASE_DIR,
+    "electricity_bill_model.pkl"
+)
+
+model = joblib.load(model_path)
 
 print("Model loaded successfully!")
 
 # =========================
 # TEST INPUT DATA
 # =========================
-
-# Format:
-# [
-#   Global_reactive_power,
-#   Voltage,
-#   Global_intensity,
-#   Sub_metering_1,
-#   Sub_metering_2,
-#   Sub_metering_3
-# ]
 
 test_data = pd.DataFrame([
     {
@@ -43,27 +57,67 @@ prediction = model.predict(test_data)
 predicted_power = prediction[0]
 
 # =========================
-# BILL ESTIMATION
+# MONTHLY UNIT ESTIMATION
 # =========================
 
-# Example:
-# ₹8 per unit
+monthly_units = predicted_power * 30
 
-estimated_bill = predicted_power * 8 * 30
+# =========================
+# TARIFF CALCULATION
+# =========================
+
+estimated_bill = calculate_bill(monthly_units)
+
+# =========================
+# USER MONITORING DATA
+# =========================
+
+user_budget = 2000
+
+current_week_usage = 55
+
+average_usage = 35
+
+appliance_usage_change = 30
+
+# =========================
+# SMART ALERT ANALYSIS
+# =========================
+
+alerts = analyze_usage(
+    estimated_bill,
+    user_budget,
+    current_week_usage,
+    average_usage,
+    appliance_usage_change
+)
 
 # =========================
 # OUTPUT
 # =========================
 
 print("\n===== PREDICTION RESULT =====")
-print(f"Predicted Power Consumption: {predicted_power:.2f} kW")
-print(f"Estimated Monthly Bill: ₹{estimated_bill:.2f}")
+
+print(
+    f"Predicted Daily Consumption: "
+    f"{predicted_power:.2f} kWh"
+)
+
+print(
+    f"Predicted Monthly Units: "
+    f"{monthly_units:.2f} units"
+)
+
+print(
+    f"Estimated Monthly Bill: "
+    f"₹{estimated_bill:.2f}"
+)
 
 # =========================
-# OVERUSE ALERT
+# SMART ALERTS
 # =========================
 
-if estimated_bill > 3000:
-    print("⚠ ALERT: High Electricity Usage Detected!")
-else:
-    print("✅ Usage is under control.")
+print("\n===== SMART ALERTS =====")
+
+for alert in alerts:
+    print(alert)

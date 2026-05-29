@@ -1,5 +1,17 @@
+# Python cache
+__pycache__/
+
 # Large dataset
 backend/household_power_consumption.txt
-oth
-# Models
+
+# ML Models
 *.pkl
+
+# Environment variables
+.env
+
+# VS Code
+.vscode/
+
+# System files
+.DS_Store
