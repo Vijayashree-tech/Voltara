@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Voltara — Smart Energy Analytics & Anomaly Dashboard</title>
+    <!-- Modern Premium Typography -->
+    <link href="https://fonts.googleapis.com/css2?family=Outfit:wght@300;400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- Chart.js for High Fidelity Analytics Charts -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar Navigation (Glassmorphic) -->
+        <aside class="sidebar">
+            <div class="logo-area">
+                <div class="logo-icon">
+                    <i class="fa-solid fa-bolt-lightning"></i>
+                </div>
+                <span class="logo-text">Voltara</span>
+            </div>
+            
+            <nav class="nav-menu">
+                <a href="#" class="nav-item active">
+                    <i class="fa-solid fa-chart-line"></i>
+                    <span>Dashboard</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-simulator-link">
+                    <i class="fa-solid fa-sliders"></i>
+                    <span>Simulator</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-alerts-link">
+                    <i class="fa-solid fa-triangle-exclamation"></i>
+                    <span>Alerts</span>
+                    <span class="badge" id="alerts-badge">0</span>
+                </a>
+                <a href="#" class="nav-item" id="nav-recommendations-link">
+                    <i class="fa-solid fa-lightbulb"></i>
+                    <span>Tips</span>
+                </a>
+            </nav>
+
+            <div class="user-profile">
+                <div class="avatar">
+                    <img src="https://api.dicebear.com/7.x/bottts/svg?seed=voltara" alt="Voltara Bot">
+                </div>
+                <div class="user-info">
+                    <span class="username">Demo Sandbox</span>
+                    <span class="user-role">Smart Home User</span>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Main Dashboard Dashboard Wrapper -->
+        <main class="main-content">
+            <!-- Header Area -->
+            <header class="dashboard-header">
+                <div class="welcome-section">
+                    <h1>Energy Analytics Workspace</h1>
+                    <p>Real-time predictive forecasting & anomaly monitoring engine.</p>
+                </div>
+                <div class="header-actions">
+                    <div class="theme-toggle" id="theme-toggle-btn">
+                        <i class="fa-solid fa-moon"></i>
+                    </div>
+                    <div class="quick-status">
+                        <span class="status-dot green"></span>
+                        <span class="status-text">System Active</span>
+                    </div>
+                </div>
+            </header>
+
+            <!-- Dashboard Grid -->
+            <div class="dashboard-grid">
+                
+                <!-- Left Control Panel: Simulator Inputs & Scenarios -->
+                <section class="grid-card control-panel animate-fade-in">
+                    <div class="card-header">
+                        <h2><i class="fa-solid fa-sliders text-cyan"></i> Real-time Simulator</h2>
+                        <span class="subtitle">Adjust grid parameters to see forecasting</span>
+                    </div>
+
+                    <!-- Preset Scenarios -->
+                    <div class="scenario-selector">
+                        <label class="section-label">Select Load Scenario</label>
+                        <div class="preset-buttons">
+                            <button class="preset-btn active" data-preset="normal" title="Normal energy footprint">
+                                <i class="fa-solid fa-house"></i> Typical
+                            </button>
+                            <button class="preset-btn" data-preset="eco" title="Low consumption, high sustainability">
+                                <i class="fa-solid fa-leaf text-green"></i> Eco Mode
+                            </button>
+                            <button class="preset-btn" data-preset="heavy" title="High power appliance utilization">
+                                <i class="fa-solid fa-fire text-orange"></i> High Load
+                            </button>
+                            <button class="preset-btn" data-preset="vacation" title="Minimal base loads">
+                                <i class="fa-solid fa-plane"></i> Vacation
+                            </button>
+                        </div>
+                    </div>
+
+                    <!-- Simulator Controls -->
+                    <div class="simulator-controls">
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name">Voltage Level</span>
+                                <span class="slider-val" id="val-voltage">234 V</span>
+                            </div>
+                            <input type="range" id="input-voltage" class="slider" min="200" max="260" step="1" value="234">
+                            <div class="slider-bounds"><span>200V</span><span>260V</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name">Current Intensity</span>
+                                <span class="slider-val" id="val-intensity">18.4 A</span>
+                            </div>
+                            <input type="range" id="input-intensity" class="slider" min="0" max="40" step="0.1" value="18.4">
+                            <div class="slider-bounds"><span>0A</span><span>40A</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name">Reactive Power</span>
+                                <span class="slider-val" id="val-reactive">0.42 kVAR</span>
+                            </div>
+                            <input type="range" id="input-reactive" class="slider" min="0" max="3" step="0.01" value="0.42">
+                            <div class="slider-bounds"><span>0 kVAR</span><span>3 kVAR</span></div>
+                        </div>
+
+                        <div class="separator-line"></div>
+                        <h3 class="sub-section-title">Sub-metered Appliances</h3>
+
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name"><i class="fa-solid fa-wind text-cyan"></i> Climate Control (AC/Heater)</span>
+                                <span class="slider-val" id="val-sub3">17.0 kWh</span>
+                            </div>
+                            <input type="range" id="input-sub3" class="slider sub-slider" min="0" max="40" step="0.5" value="17.0">
+                            <div class="slider-bounds"><span>0 kWh</span><span>40 kWh</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name"><i class="fa-solid fa-shirt text-purple"></i> Laundry Appliances</span>
+                                <span class="slider-val" id="val-sub2">1.0 kWh</span>
+                            </div>
+                            <input type="range" id="input-sub2" class="slider sub-slider" min="0" max="15" step="0.5" value="1.0">
+                            <div class="slider-bounds"><span>0 kWh</span><span>15 kWh</span></div>
+                        </div>
+
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name"><i class="fa-solid fa-kitchen-set text-orange"></i> Kitchen & Cooking</span>
+                                <span class="slider-val" id="val-sub1">0.0 kWh</span>
+                            </div>
+                            <input type="range" id="input-sub1" class="slider sub-slider" min="0" max="15" step="0.5" value="0.0">
+                            <div class="slider-bounds"><span>0 kWh</span><span>15 kWh</span></div>
+                        </div>
+
+                        <div class="separator-line"></div>
+                        
+                        <div class="control-group">
+                            <div class="slider-label-row">
+                                <span class="slider-name budget-label"><i class="fa-solid fa-wallet text-gold"></i> Monthly Budget Cap</span>
+                                <span class="slider-val budget-val" id="val-budget">₹2,000</span>
+                            </div>
+                            <input type="range" id="input-budget" class="slider budget-slider" min="500" max="10000" step="100" value="2000">
+                            <div class="slider-bounds"><span>₹500</span><span>₹10,000</span></div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Right Analytics Panels -->
+                <div class="analytics-panels">
+                    
+                    <!-- KPI Metric Cards (2x2 Grid) -->
+                    <section class="kpi-grid">
+                        
+                        <!-- KPI Card 1: Active Power & Monthly Units -->
+                        <div class="kpi-card glowing-cyan animate-slide-up">
+                            <div class="kpi-icon">
+                                <i class="fa-solid fa-bolt-lightning"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Active Power / Units</span>
+                                <span class="kpi-value" id="kpi-predicted-power">4.32 kW</span>
+                                <span class="kpi-subtext" id="kpi-monthly-units">129.60 units / mo</span>
+                            </div>
+                            <div class="kpi-progress">
+                                <div class="progress-bar-fill cyan-glow" id="power-progress" style="width: 45%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- KPI Card 2: Estimated Bill -->
+                        <div class="kpi-card glowing-purple animate-slide-up" style="animation-delay: 0.1s;">
+                            <div class="kpi-icon">
+                                <i class="fa-solid fa-indian-rupee-sign"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Estimated Monthly Bill</span>
+                                <span class="kpi-value" id="kpi-estimated-bill">₹74.00</span>
+                                <span class="kpi-subtext hover-tooltip" id="kpi-bill-breakdown">
+                                    Hover for breakdown <i class="fa-solid fa-circle-info"></i>
+                                    <span class="tooltip-content" id="bill-breakdown-text">0-100: Free</span>
+                                </span>
+                            </div>
+                            <div class="kpi-progress">
+                                <div class="progress-bar-fill purple-glow" id="bill-progress" style="width: 15%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- KPI Card 3: Carbon Footprint -->
+                        <div class="kpi-card glowing-green animate-slide-up" style="animation-delay: 0.2s;">
+                            <div class="kpi-icon">
+                                <i class="fa-solid fa-cloud"></i>
+                            </div>
+                            <div class="kpi-content">
+                                <span class="kpi-label">Carbon Footprint</span>
+                                <span class="kpi-value" id="kpi-carbon">106.27 kg</span>
+                                <span class="kpi-subtext text-lightgreen" id="kpi-carbon-status">CO₂ emission equivalent</span>
+                            </div>
+                            <div class="kpi-progress">
+                                <div class="progress-bar-fill green-glow" id="carbon-progress" style="width: 30%;"></div>
+                            </div>
+                        </div>
+
+                        <!-- KPI Card 4: Sustainability Score -->
+                        <div class="kpi-card glowing-violet animate-slide-up" style="animation-delay: 0.3s;">
+                            <div class="score-circle-wrapper">
+                                <svg class="score-ring" width="60" height="60">
+                                    <circle class="score-ring-bg" cx="30" cy="30" r="25" />
+                                    <circle class="score-ring-progress" id="score-ring-svg" cx="30" cy="30" r="25" stroke-dasharray="157" stroke-dashoffset="0" />
+                                </svg>
+                                <span class="score-text" id="kpi-sustainability-score">100</span>
+                            </div>
+                            <div class="kpi-content score-content">
+                                <span class="kpi-label">Sustainability Rating</span>
+                                <span class="kpi-value-text" id="kpi-sustainability-grade">EXCELLENT</span>
+                                <span class="kpi-subtext" id="kpi-sustainability-status">Eco-optimal setup</span>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Middle row: Charts Section -->
+                    <section class="charts-row">
+                        <!-- Chart 1: Appliance Breakdown -->
+                        <div class="grid-card chart-card animate-fade-in" style="animation-delay: 0.2s;">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-pie text-cyan"></i> Appliance Breakdown</h3>
+                                <span class="subtitle">Estimated energy share percentage</span>
+                            </div>
+                            <div class="chart-container pie-container">
+                                <canvas id="applianceBreakdownChart"></canvas>
+                            </div>
+                        </div>
+
+                        <!-- Chart 2: Usage Spikes & Anomaly Tracker -->
+                        <div class="grid-card chart-card animate-fade-in" style="animation-delay: 0.3s;">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-chart-area text-purple"></i> Usage & Anomaly Tracker</h3>
+                                <span class="subtitle">Weekly simulated load vs. baseline average</span>
+                            </div>
+                            <div class="chart-container line-container">
+                                <canvas id="usageSpikesChart"></canvas>
+                            </div>
+                        </div>
+                    </section>
+
+                    <!-- Bottom row: Alerts & AI Recommendations -->
+                    <section class="alerts-recommendations-row">
+                        <!-- Alert Engine Panel -->
+                        <div class="grid-card status-card animate-fade-in" style="animation-delay: 0.4s;" id="alert-panel-section">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-triangle-exclamation text-orange animate-pulse"></i> Intelligent Alert Hub</h3>
+                                <span class="subtitle">Active real-time anomaly detection notifications</span>
+                            </div>
+                            <div class="alerts-list" id="alerts-container">
+                                <!-- Dynamic Alerts Appended Here -->
+                                <div class="alert-item normal">
+                                    <div class="alert-icon"><i class="fa-solid fa-circle-check"></i></div>
+                                    <div class="alert-content">
+                                        <h4 class="alert-title">System Optimal</h4>
+                                        <p class="alert-desc">Usage pattern matches standard baselines.</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- AI saving recommendations -->
+                        <div class="grid-card recommendations-card animate-fade-in" style="animation-delay: 0.5s;">
+                            <div class="card-header">
+                                <h3><i class="fa-solid fa-lightbulb text-gold"></i> AI Recommendation Engine</h3>
+                                <span class="subtitle">Tailored saving ideas based on simulated usage</span>
+                            </div>
+                            <div class="recommendations-list" id="recommendations-container">
+                                <!-- Dynamic Recommendations Appended Here -->
+                                <div class="rec-item">
+                                    <div class="rec-icon"><i class="fa-solid fa-check"></i></div>
+                                    <div class="rec-text">Loading insights...</div>
+                                </div>
+                            </div>
+                        </div>
+                    </section>
+
+                </div>
+            </div>
+        </main>
+    </div>
+
+    <!-- Script loading -->
+    <script src="app.js"></script>
+</body>
+</html>
