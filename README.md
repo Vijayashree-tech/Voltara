@@ -89,20 +89,33 @@ python -m venv venv
 Activate:
 
 venv\Scripts\activate
+
 Linux / macOS
+
 python3 -m venv venv
+
 source venv/bin/activate
+
 Install Dependencies
+
 pip install -r requirements.txt
+
 Run Backend
+
 python app.py
 
 🎨 Frontend Setup
+
 Navigate to Frontend
+
 cd frontend
+
 Install Dependencies
+
 npm install
+
 Run Frontend
+
 npm run dev
 
 🌟 Innovation
