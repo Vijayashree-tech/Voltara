@@ -435,3 +435,483 @@ body{
 }
 
 }
+
+/* ==========================================
+   AI EXECUTIVE SUMMARY
+========================================== */
+
+.ai-summary{
+  position:relative;
+
+  margin-bottom:30px;
+
+  padding:35px;
+
+  border-radius:30px;
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(56,189,248,.12),
+  rgba(34,197,94,.08)
+  );
+
+  border:
+  1px solid rgba(255,255,255,.08);
+
+  backdrop-filter:blur(25px);
+
+  overflow:hidden;
+}
+
+.ai-summary::before{
+  content:"";
+
+  position:absolute;
+
+  top:-100px;
+  right:-100px;
+
+  width:250px;
+  height:250px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+  circle,
+  rgba(56,189,248,.18),
+  transparent
+  );
+}
+
+.summary-header{
+  display:flex;
+  align-items:center;
+  gap:15px;
+
+  margin-bottom:20px;
+}
+
+.summary-header svg{
+  font-size:2rem;
+  color:#38bdf8;
+}
+
+.summary-header h2{
+  font-size:1.8rem;
+  font-weight:800;
+}
+
+.ai-summary p{
+  font-size:1.05rem;
+  line-height:1.8;
+  color:#dbeafe;
+}
+
+.ai-summary strong{
+  color:#38bdf8;
+}
+
+/* ==========================================
+   KPI CARDS
+========================================== */
+
+.metric-card{
+  position:relative;
+  overflow:hidden;
+}
+
+.metric-icon{
+  font-size:2rem;
+  margin-bottom:15px;
+  color:#38bdf8;
+}
+
+.metric-card::after{
+  content:"";
+
+  position:absolute;
+
+  top:0;
+  left:0;
+
+  width:100%;
+  height:4px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #38bdf8,
+  #22c55e
+  );
+}
+
+.metric-card:hover{
+  transform:
+  translateY(-8px)
+  scale(1.02);
+
+  box-shadow:
+  0 20px 45px rgba(56,189,248,.15);
+}
+
+/* ==========================================
+   FORECAST CHART
+========================================== */
+
+.chart-section{
+  position:relative;
+}
+
+.recharts-wrapper{
+  margin-top:20px;
+}
+
+.recharts-cartesian-axis-tick-value{
+  fill:#94a3b8;
+}
+
+.recharts-tooltip-wrapper{
+  border-radius:12px;
+}
+
+/* ==========================================
+   SAVINGS CARD
+========================================== */
+
+.savings-card{
+  text-align:center;
+
+  background:
+  linear-gradient(
+  135deg,
+  rgba(34,197,94,.15),
+  rgba(16,185,129,.08)
+  );
+
+  border:
+  1px solid rgba(34,197,94,.2);
+}
+
+.savings-number{
+  font-size:4rem;
+  font-weight:900;
+
+  margin:20px 0;
+
+  background:
+  linear-gradient(
+  90deg,
+  #22c55e,
+  #10b981
+  );
+
+  -webkit-background-clip:text;
+  -webkit-text-fill-color:transparent;
+}
+
+.savings-card p{
+  color:#bbf7d0;
+}
+
+/* ==========================================
+   ENERGY INTELLIGENCE CENTER
+========================================== */
+
+.alert{
+  position:relative;
+
+  padding:18px;
+
+  border-radius:15px;
+
+  background:
+  linear-gradient(
+  90deg,
+  rgba(239,68,68,.15),
+  rgba(239,68,68,.05)
+  );
+
+  border-left:
+  5px solid #ef4444;
+
+  transition:.3s;
+}
+
+.alert:hover{
+  transform:translateX(6px);
+}
+
+/* ==========================================
+   RECOMMENDATION CARDS
+========================================== */
+
+.recommendation{
+  padding:18px;
+
+  border-radius:15px;
+
+  background:
+  linear-gradient(
+  90deg,
+  rgba(34,197,94,.15),
+  rgba(34,197,94,.05)
+  );
+
+  border-left:
+  5px solid #22c55e;
+
+  transition:.3s;
+}
+
+.recommendation:hover{
+  transform:translateX(6px);
+}
+
+/* ==========================================
+   DONUT CHART SECTION
+========================================== */
+
+.analytics-card{
+  display:flex;
+  align-items:center;
+  justify-content:center;
+}
+
+.recharts-sector{
+  transition:.3s;
+}
+
+.recharts-sector:hover{
+  filter:brightness(1.2);
+}
+
+/* ==========================================
+   CARBON TRACKER
+========================================== */
+
+.carbon-bar{
+  width:100%;
+  height:18px;
+
+  border-radius:50px;
+
+  overflow:hidden;
+
+  margin:25px 0;
+
+  background:
+  rgba(255,255,255,.08);
+}
+
+.carbon-fill{
+  height:100%;
+
+  border-radius:50px;
+
+  background:
+  linear-gradient(
+  90deg,
+  #22c55e,
+  #38bdf8
+  );
+
+  box-shadow:
+  0 0 20px rgba(34,197,94,.4);
+
+  transition:1.2s ease;
+}
+
+/* ==========================================
+   SECTION IMPROVEMENT
+========================================== */
+
+.section{
+  position:relative;
+
+  overflow:hidden;
+}
+
+.section::before{
+  content:"";
+
+  position:absolute;
+
+  top:-150px;
+  right:-150px;
+
+  width:300px;
+  height:300px;
+
+  border-radius:50%;
+
+  background:
+  radial-gradient(
+  circle,
+  rgba(56,189,248,.08),
+  transparent
+  );
+}
+
+/* ==========================================
+   FLOATING GLOW
+========================================== */
+
+.container::before{
+  content:"";
+
+  position:fixed;
+
+  top:10%;
+  left:5%;
+
+  width:350px;
+  height:350px;
+
+  border-radius:50%;
+
+  background:
+  rgba(56,189,248,.08);
+
+  filter:blur(120px);
+
+  pointer-events:none;
+}
+
+.container::after{
+  content:"";
+
+  position:fixed;
+
+  bottom:5%;
+  right:5%;
+
+  width:350px;
+  height:350px;
+
+  border-radius:50%;
+
+  background:
+  rgba(34,197,94,.08);
+
+  filter:blur(120px);
+
+  pointer-events:none;
+}
+
+/* ==========================================
+   RESPONSIVE
+========================================== */
+
+@media(max-width:768px){
+
+.ai-summary{
+  padding:20px;
+}
+
+.summary-header h2{
+  font-size:1.3rem;
+}
+
+.savings-number{
+  font-size:2.5rem;
+}
+
+.metric-value{
+  font-size:1.8rem;
+}
+
+}
+
+.analytics-layout{
+  display:grid;
+
+  grid-template-columns:
+  420px 1fr;
+
+  gap:50px;
+
+  align-items:center;
+}
+
+.donut-wrapper{
+  position:relative;
+
+  width:350px;
+  height:350px;
+
+  margin:auto;
+}
+
+.donut-center{
+  position:absolute;
+
+  top:50%;
+  left:50%;
+
+  transform:
+  translate(-50%,-50%);
+
+  text-align:center;
+}
+
+.donut-center h2{
+  font-size:3rem;
+  font-weight:900;
+
+  color:#38bdf8;
+}
+
+.donut-center span{
+  color:#94a3b8;
+}
+
+.analytics-info{
+  display:flex;
+  flex-direction:column;
+  gap:18px;
+}
+
+.analytics-item{
+  display:flex;
+  align-items:center;
+  justify-content:space-between;
+
+  padding:18px;
+
+  border-radius:18px;
+
+  background:
+  rgba(255,255,255,.04);
+
+  border:
+  1px solid rgba(255,255,255,.05);
+
+  transition:.3s;
+}
+
+.analytics-item:hover{
+  transform:translateX(6px);
+}
+
+.color-dot{
+  width:14px;
+  height:14px;
+
+  border-radius:50%;
+
+  margin-right:10px;
+}
+
+.analytics-item span{
+  flex:1;
+
+  margin-left:15px;
+}
+
+.analytics-item strong{
+  font-size:1.1rem;
+
+  color:white;
+}
